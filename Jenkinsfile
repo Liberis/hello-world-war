@@ -4,6 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'mvn install'
+                step([$class: 'HelloWorldBuilder', name:'Liberis'])
                     }
                 
 
