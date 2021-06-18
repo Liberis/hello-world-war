@@ -10,7 +10,7 @@ pipeline {
                 
                 step([$class: 'HelloWorldBuilder', name:'Liberis'])
                } 
-
             }
         }
     }
+}
