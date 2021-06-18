@@ -4,9 +4,12 @@ pipeline {
         stage('build') {
             steps {
                 sh 'mvn install'
-                step([$class: 'HelloWorldBuilder', name:'Liberis'])
                     }
+        stage('check'){
+            steps{
                 
+                step([$class: 'HelloWorldBuilder', name:'Liberis'])
+               } 
 
             }
         }
