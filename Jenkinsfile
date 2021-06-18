@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh 'mvn install'
                     }
+                }
         stage('check'){
             steps{
                 
@@ -13,4 +14,3 @@ pipeline {
             }
         }
     }
-}
