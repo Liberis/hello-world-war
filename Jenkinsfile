@@ -32,9 +32,47 @@ def msgFlatten(def list, def msgs) {
 
    return  list
 }
+environments = 'lab\nstage\npro'
+def props = readProperties  file: 'demo.environment'
+properties([
+    parameters([
+        [$class: 'CascadeChoiceParameter', 
+            choiceType: 'PT_CHECKBOX1',
+            description: 'Select a choice',
+            filterLength: 1,
+            filterable: true,
+            name: 'choice1',
+            referencedParameters: 'ENVIRONMENT',
+            script: [$class: 'GroovyScript',
+                fallbackScript: [
+                    classpath: [], 
+                    sandbox: true, 
+                    script: 'return ["ERROR"]'
+                ],
+                script: [
+                    classpath: [], 
+                    sandbox: true, 
+                    script: """
+                        if (ENVIRONMENT == 'lab') { 
+                            return[props]
+                        }
+                        else {
+                            return[props]
+                        }
+                    """.stripIndent()
+                ]
+            ]
+        ]
+    ])
+])
 
 pipeline {
     agent any
+
+    parameters {
+        choice(name: 'ENVIRONMENT', choices: "${environments}")
+    }
+
     stages {
         stage('build') {
             steps {
