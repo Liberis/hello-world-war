@@ -37,7 +37,7 @@ def props = readProperties  file: 'demo.environment'
 properties([
     parameters([
         [$class: 'CascadeChoiceParameter', 
-            choiceType: 'PT_CHECKBOX1',
+            choiceType: 'PT_CHECKBOX',
             description: 'Select a choice',
             filterLength: 1,
             filterable: true,
@@ -54,10 +54,10 @@ properties([
                     sandbox: true, 
                     script: """
                         if (ENVIRONMENT == 'lab') { 
-                            return[props]
+                            return[$props]
                         }
                         else {
-                            return[props]
+                            return[$props]
                         }
                     """.stripIndent()
                 ]
